@@ -64,7 +64,34 @@ const Getbet = (balance, lines) =>
             }
         } 
 };
+const Spin = () =>
+{
+    const symbols = [];
+    for (const[symbol, count] of Object.entries(SYMBOLS_COUNT))
+    {
+        for (let i = 0; i < count; i++)
+        {
+            symbols.push(symbol);
+        }
+    }
+    const reels = [];
+    for (let i = 0; i < COLS; i++)
+    {
+        reels.push([]);
+        reelsValue = [...symbols];
+        for (let j = 0; j < ROWS; j++)
+        {
+            randomindex = Math.floor(Math.random() * reelsValue.length);
+            reels[i].push(reelsValue[randomindex]);
+            reelsValue.splice(randomindex, 1);    
+        }
+    }
+    return reels;
+}
 let balance = GetDeposit();
 const lines = GetLine();
 const bet = Getbet(balance, lines);
+const reels = Spin();
+console.log(reels);
+
 
